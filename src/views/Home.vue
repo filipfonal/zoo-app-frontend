@@ -1,17 +1,11 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <h1>home view</h1>
 </template>
 
-<script>
-import HelloWorld from '@/components/HelloWorld.vue';
+<script lang="ts">
+import Component from "vue-class-component";
+import Vue from "vue";
 
-export default {
-  name: 'home',
-  components: {
-    HelloWorld,
-  },
-};
+@Component
+export default class Home extends Vue {}
 </script>
