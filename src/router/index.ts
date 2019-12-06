@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import MainLayout from '@/layouts/MainLayout.vue';
 import Home from '@/views/Home.vue';
+import Auth from "@/views/Auth.vue";
 
 Vue.use(VueRouter);
 
@@ -14,6 +15,11 @@ const routes = [
         path: '/',
         name: 'home',
         component: Home,
+      },
+      {
+        path: 'auth',
+        name: 'auth',
+        component: Auth,
       },
     ],
   },
