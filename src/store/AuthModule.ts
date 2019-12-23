@@ -12,10 +12,8 @@ export default class AuthModule extends VuexModule {
     private data: AuthState = token ? {isLoggedIn: true} : {isLoggedIn: false};
 
     @Mutation
-    public authSuccess(payload: any) {
+    public setAuthState(payload: any) {
         this.data.isLoggedIn = payload.isLoggedIn;
-        localStorage.setItem('auth_token', payload.token);
-        router.push('/');
     }
 
     @Action
@@ -27,10 +25,11 @@ export default class AuthModule extends VuexModule {
                 password: loginData.password,
             },
         }).then((response) => {
-            this.context.commit('authSuccess', {
+            this.context.commit('setAuthState', {
                 isLoggedIn: true,
-                token: response.data.issueToken,
             });
+            localStorage.setItem('auth_token', response.data.issueToken);
+            router.push('/');
         }, ({graphQLErrors}) => {
             this.context.dispatch('notify', {
                 type: 'error',
@@ -59,5 +58,14 @@ export default class AuthModule extends VuexModule {
                 message: graphQLErrors[0].message,
             });
         });
+    }
+
+    @Action
+    public logout() {
+        this.context.commit('setAuthState', {
+            isLoggedIn: false,
+        });
+        localStorage.removeItem('auth_token');
+        router.push('/auth');
     }
 }
