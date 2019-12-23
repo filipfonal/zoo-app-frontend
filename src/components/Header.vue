@@ -6,8 +6,8 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn fab dark small color="teal">
-      <v-icon dark>mdi-plus</v-icon>
+    <v-btn icon dark color="white">
+      <v-icon dark>mdi-dots-vertical</v-icon>
     </v-btn>
   </v-app-bar>
 </template>
