@@ -4,13 +4,11 @@
             <v-card-text>
                 <v-form ref="form" lazy-validation>
 
-                    <v-text-field v-model="email" label="E-mail" required></v-text-field>
+                    <v-text-field v-model="email" type="email" label="E-mail" required></v-text-field>
 
-                    <v-text-field v-model="password" label="Password" required></v-text-field>
+                    <v-text-field v-model="password" type="password" label="Password" required></v-text-field>
 
                     <v-btn color="amber" class="login-button" @click="attemptLogin()">Login</v-btn>
-                    
-                    <v-btn color="amber" class="login-button" @click="test()">Test</v-btn>
 
                 </v-form>
             </v-card-text>
@@ -18,24 +16,20 @@
     </div>
 </template>
 
-<script lang="ts">
-import Component from "vue-class-component";
-import Vue from "vue";
+<script lang='ts'>
+import Component from 'vue-class-component';
+import Vue from 'vue';
 
 @Component
 export default class Auth extends Vue {
     private email = '';
     private password = '';
 
-    attemptLogin() {
+    private attemptLogin() {
         this.$store.dispatch('login', {
             email: this.email,
-            password: this.password
+            password: this.password,
         });
-    }
-    
-    test() {
-        console.log(this.$store.getters.tokenValue);
     }
 }
 </script>
