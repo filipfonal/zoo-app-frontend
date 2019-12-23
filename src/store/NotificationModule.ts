@@ -27,6 +27,6 @@ export default class NotificationModule extends VuexModule {
                 type: undefined,
                 message: undefined,
             });
-        }, 2000);
+        }, 4000);
     }
 }

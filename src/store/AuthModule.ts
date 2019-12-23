@@ -1,5 +1,5 @@
 import {Action, Module, Mutation, VuexModule} from 'vuex-module-decorators';
-import {ISSUE_TOKEN_MUTATION} from '@/graphql/mutations';
+import {CREATE_USER_MUTATION, ISSUE_TOKEN_MUTATION} from '@/graphql/mutations';
 import {apolloClient, token} from '@/main';
 import router from '@/router';
 
@@ -12,7 +12,7 @@ export default class AuthModule extends VuexModule {
     private data: AuthState = token ? {isLoggedIn: true} : {isLoggedIn: false};
 
     @Mutation
-    public loginSuccess(payload: any) {
+    public authSuccess(payload: any) {
         this.data.isLoggedIn = payload.isLoggedIn;
         localStorage.setItem('auth_token', payload.token);
         router.push('/');
@@ -27,9 +27,31 @@ export default class AuthModule extends VuexModule {
                 password: loginData.password,
             },
         }).then((response) => {
-            this.context.commit('loginSuccess', {
+            this.context.commit('authSuccess', {
                 isLoggedIn: true,
                 token: response.data.issueToken,
+            });
+        }, ({graphQLErrors}) => {
+            this.context.dispatch('notify', {
+                type: 'error',
+                message: graphQLErrors[0].message,
+            });
+        });
+    }
+
+    @Action
+    public register(registerData: any) {
+        apolloClient.mutate({
+            mutation: CREATE_USER_MUTATION,
+            variables: {
+                email: registerData.email,
+                name: registerData.name,
+                password: registerData.password,
+            },
+        }).then((response) => {
+            this.context.dispatch('notify', {
+                type: 'success',
+                message: `Thank you ${response.data.createUser.name} for registration. You can login now!`,
             });
         }, ({graphQLErrors}) => {
             this.context.dispatch('notify', {
