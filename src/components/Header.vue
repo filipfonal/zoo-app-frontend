@@ -6,18 +6,34 @@
 
     <v-spacer></v-spacer>
 
-    <v-btn fab dark small color="teal">
-      <v-icon dark>mdi-plus</v-icon>
-    </v-btn>
+
+    <v-menu :offset-y="true">
+      <template v-slot:activator="{ on }">
+          <v-btn icon dark color="white" v-on="on">
+            <v-icon dark>mdi-dots-vertical</v-icon>
+          </v-btn>
+      </template>
+      <v-list>
+
+        <v-list-item @click="logout()">
+          <v-list-item-title>Logout</v-list-item-title>
+        </v-list-item>
+
+      </v-list>
+    </v-menu>
   </v-app-bar>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import {Component} from "vue-property-decorator";
+import Vue from 'vue';
+import {Component} from 'vue-property-decorator';
 
 @Component
-export default class Header extends Vue {}
+export default class Header extends Vue {
+    private logout() {
+        this.$store.dispatch('logout');
+    }
+}
 </script>
 
 <style scoped>

@@ -1,15 +1,13 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import AuthModule from '@/store/AuthModule';
+import NotificationModule from '@/store/NotificationModule';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
+export const store = new Vuex.Store({
   modules: {
+    AuthModule,
+    NotificationModule,
   },
 });
