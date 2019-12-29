@@ -53,7 +53,7 @@ export default class Auth extends Vue {
     private activeTab = 0;
 
     private attemptLogin() {
-        if (!this.isValidForLogin()){
+        if (!this.isValidForLogin()) {
             this.invalidFormAlert();
             return;
         }
@@ -90,8 +90,8 @@ export default class Auth extends Vue {
     private invalidFormAlert() {
         this.$store.dispatch('notify', {
             type: 'warning',
-            message: 'Please fill up all fields'
-        })
+            message: 'Please fill up all fields',
+        });
     }
 
     private isValidForLogin(): boolean {
