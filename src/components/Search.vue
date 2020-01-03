@@ -4,7 +4,15 @@
     Search zoo
     <div class="row">
       <div class="col-md-9">
-        <v-autocomplete label="City e.g. London" :items="cities" :search-input.sync="city" single-line autofocus hideNoData color="amber"></v-autocomplete>
+        <v-autocomplete label="City e.g. London"
+                        :items="cities"
+                        :search-input.sync="city"
+                        item-text="name"
+                        single-line
+                        autofocus
+                        hideNoData
+                        color="amber">
+        </v-autocomplete>
         <br>
         <v-slider
                 v-model="range"
@@ -14,11 +22,11 @@
                 max="500"
                 thumb-label="always"
                 ticks
-                color="amber"
-        ></v-slider>
+                color="amber">
+        </v-slider>
       </div>
       <div class="col-md-3 d-flex justify-center align-center">
-        <v-btn color="amber" fab x-large dark>
+        <v-btn color="amber" fab x-large dark @click="search()">
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
       </div>
@@ -31,22 +39,39 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import _ from 'lodash';
-
-export interface City {
-    text: string | number | object;
-    value: string | number | object;
-}
+import {ZooSearchForm} from "@/models/ZooSearchForm";
+import {City} from "@/models/City";
 
 @Component
 export default class Search extends Vue {
-    @Prop() private cities: Array<City>;
+    @Prop() private cities: City[];
     private city = '';
     private range = 0;
 
-    private created() {
+    private created(): void {
         this.$watch('city', _.debounce((value) => {
-            this.$emit('searchCity', value);
-        }, 300))
+            if (value) {
+                this.$emit('searchCities', value);
+            }
+        }, 300));
+    }
+
+    private search(): void {
+        this.$emit('searchZoo', this.getSearchFormData());
+    }
+
+    private getSearchFormData(): ZooSearchForm {
+        let city = this.getFullCityObject(this.city);
+
+        return {
+            latitude: city.location.latitude,
+            longitude: city.location.longitude,
+            range: this.range
+        }
+    }
+
+    private getFullCityObject(cityName: string): City {
+        return <City>this.cities.find(city => city.name === cityName);
     }
 }
 </script>
