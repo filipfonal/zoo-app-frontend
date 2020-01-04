@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import MainLayout from '@/layouts/MainLayout.vue';
 import Home from '@/views/Home.vue';
 import Auth from '@/views/Auth.vue';
+import Zoo from '@/views/Zoo.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes = [
         path: '/',
         name: 'home',
         component: Home,
+      },
+      {
+        path: '/zoo/:id',
+        name: 'zoo',
+        component: Zoo,
       },
       {
         path: 'auth',

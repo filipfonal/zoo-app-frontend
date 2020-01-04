@@ -24,6 +24,22 @@ export const FIND_NEARBY_ZOOS = gql`
             }
             description
             logo
+            rating
+        }
+    }
+`;
+
+export const GET_SINGLE_ZOO = gql`
+    query zoo($id: Int!) {
+        zoo(id: $id){
+            id
+            name
+            location {
+                longitude
+                latitude
+            }
+            description
+            logo
             wikipediaLink
             address {
                 full

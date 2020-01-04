@@ -1,7 +1,7 @@
 <template>
   <div class="home-wrapper">
     <Search class="search" :reduce-size="reduceSearchSize" @searchCities="searchCities" @searchZoo="searchZoo" :cities="cities" />
-    <Map class="map" :show-map="showMap" :zoos="zoos" />
+    <Map class="map" :show-map="showMap" :zoos="zoos" @selectedZoo="showZoo" />
   </div>
 </template>
 
@@ -32,6 +32,10 @@ export default class Home extends Vue {
 
     private searchZoo(formData: ZooSearchForm) {
         this.$store.dispatch('findNearbyZoos', formData);
+    }
+
+    private showZoo(id: number) {
+      this.$router.push(`zoo/${id}`);
     }
 
     private created(): void {

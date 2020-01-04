@@ -6,12 +6,18 @@
         <div class="row">
           <div class="col-md-12">
             <h4>{{ marker.name }}</h4>
+            <star-rating
+                    :rating="marker.rating"
+                    :increment="0.1"
+                    read-only
+                    :show-rating="false"
+                    :star-size="15"></star-rating>
           </div>
           <div class="col-md-12">
             <img :src="marker.logo" alt="">
           </div>
           <div class="col-md-12">
-            <v-btn class="zoo-select-btn" color="amber" dark @click="test()">
+            <v-btn class="zoo-select-btn" color="amber" dark @click="selectZoo(marker.id)">
               Wybierz
             </v-btn>
           </div>
@@ -66,14 +72,15 @@ export default class Map extends Vue {
                         latlng: L.latLng(zoo.location.latitude, zoo.location.longitude),
                         name: zoo.name,
                         logo: zoo.logo,
+                        rating: zoo.rating,
                     });
                 })
             }
         })
     }
 
-    test() {
-        console.log('dupa');
+    selectZoo(id: number) {
+        this.$emit('selectedZoo', id);
     }
 }
 </script>
