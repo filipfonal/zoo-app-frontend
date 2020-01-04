@@ -6,6 +6,8 @@ import vuetify from './plugins/vuetify';
 import ApolloClient from 'apollo-boost';
 import VueApollo from 'vue-apollo';
 import {store} from '@/store';
+// @ts-ignore
+import StarRating from 'vue-star-rating';
 
 export const token = () => localStorage.getItem('auth_token');
 
@@ -23,6 +25,8 @@ const apolloProvider = new VueApollo({
 Vue.config.productionTip = false;
 
 Vue.use(VueApollo);
+
+Vue.component('star-rating', StarRating);
 
 new Vue({
   router,
