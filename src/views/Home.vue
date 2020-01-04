@@ -18,8 +18,8 @@ import {Zoo} from "@/models/Zoo";
     },
 })
 export default class Home extends Vue {
-    private cities: City[] = this.$store.getters.cities;
-    private zoos: Zoo[] = this.$store.getters.zoos;
+    private cities: City[] = [];
+    private zoos: Zoo[] = [];
 
     private searchCities(value: string) {
         this.$store.dispatch('findCities', value);
@@ -29,7 +29,17 @@ export default class Home extends Vue {
         this.$store.dispatch('findNearbyZoos', formData);
     }
 
+    private created(): void {
+        this.$store.watch(
+            (state, getters) => getters.cities,
+            (value: City[]) => this.cities = value
+        );
 
+        this.$store.watch(
+            (state, getters) => getters.zoos,
+            (value: Zoo[]) => this.zoos = value
+        );
+    }
 }
 </script>
 <style scoped lang="scss">

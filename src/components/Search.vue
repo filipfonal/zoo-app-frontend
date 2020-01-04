@@ -7,7 +7,9 @@
         <v-autocomplete label="City e.g. London"
                         :items="cities"
                         :search-input.sync="city"
-                        item-text="name"
+                        :filter="cityFilter"
+                        item-text="fullName"
+                        return-object
                         single-line
                         autofocus
                         hideNoData
@@ -45,15 +47,22 @@ import {City} from "@/models/City";
 @Component
 export default class Search extends Vue {
     @Prop() private cities: City[];
+    private recentCitiesValue: City[] = [];
     private city = '';
     private range = 0;
 
     private created(): void {
         this.$watch('city', _.debounce((value) => {
-            if (value) {
+            if (value && value !== '') {
                 this.$emit('searchCities', value);
             }
         }, 300));
+
+        this.$watch('cities', (value: City[]) => {
+            if (value.length > 0) {
+                this.recentCitiesValue = value;
+            }
+        })
     }
 
     private search(): void {
@@ -61,7 +70,7 @@ export default class Search extends Vue {
     }
 
     private getSearchFormData(): ZooSearchForm {
-        let city = this.getFullCityObject(this.city);
+        const city = this.getFullCityObject(this.city);
 
         return {
             latitude: city.location.latitude,
@@ -70,8 +79,12 @@ export default class Search extends Vue {
         }
     }
 
-    private getFullCityObject(cityName: string): City {
-        return <City>this.cities.find(city => city.name === cityName);
+    private getFullCityObject(cityFullName: string): City {
+        return <City>this.recentCitiesValue.find(city => city.fullName === cityFullName);
+    }
+
+    private cityFilter(item: any, queryText: string, itemText: string): boolean {
+        return itemText.toLocaleLowerCase().includes(queryText[0].toLocaleLowerCase());
     }
 }
 </script>
