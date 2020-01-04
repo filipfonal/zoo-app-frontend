@@ -1,6 +1,7 @@
 <template>
   <div class="search-wrapper">
     <Search class="search" @searchCities="searchCities" @searchZoo="searchZoo" :cities="cities" />
+    <Map class="map" :zoos="zoos" />
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 import Component from 'vue-class-component';
 import Vue from 'vue';
 import Search from '@/components/Search.vue';
+import Map from '@/components/Map.vue';
 import {ZooSearchForm} from "@/models/ZooSearchForm";
 import {City} from "@/models/City";
 import {Zoo} from "@/models/Zoo";
@@ -15,6 +17,7 @@ import {Zoo} from "@/models/Zoo";
 @Component({
     components: {
         Search,
+        Map
     },
 })
 export default class Home extends Vue {
