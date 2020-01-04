@@ -1,39 +1,49 @@
 <template>
-  <v-card>
-  <v-card-text>
-    Search zoo
-    <div class="row">
-      <div class="col-md-9">
-        <v-autocomplete label="City e.g. London"
-                        :items="cities"
-                        :search-input.sync="city"
-                        :filter="cityFilter"
-                        item-text="fullName"
-                        return-object
-                        single-line
-                        autofocus
-                        hideNoData
-                        color="amber">
-        </v-autocomplete>
-        <br>
-        <v-slider
-                v-model="range"
-                label="Szukaj w odległości (km)"
-                step="10"
-                min="0"
-                max="500"
-                thumb-label="always"
-                ticks
-                color="amber">
-        </v-slider>
+  <v-card class="search-wrapper" :class="{ 'small': reduceSize }">
+    <v-card-text>
+      Search zoo
+      <div class="row">
+        <div :class="{ 'col-md-10': reduceSize, 'col-md-9': !reduceSize }">
+          <div class="row">
+            <div :class="{ 'col-md-6': reduceSize, 'col-md-12': !reduceSize }">
+              <v-autocomplete
+                              class="cityInput"
+                              label="City e.g. London"
+                              :items="cities"
+                              :search-input.sync="city"
+                              :filter="cityFilter"
+                              item-text="fullName"
+                              return-object
+                              single-line
+                              autofocus
+                              hideNoData
+                              color="amber">
+              </v-autocomplete>
+            </div>
+
+            <div :class="{ 'col-md-6': reduceSize, 'col-md-12': !reduceSize }">
+              <v-slider
+                      class="rangeInput"
+                      v-model="range"
+                      label="Szukaj w odległości (km)"
+                      step="10"
+                      min="0"
+                      max="500"
+                      thumb-label="always"
+                      ticks
+                      color="amber">
+              </v-slider>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-center"
+             :class="{'col-md-2' : reduceSize, 'col-md-3 align-center' : !reduceSize}">
+          <v-btn class="search-btn" color="amber" fab  dark @click="search()">
+            <v-icon>mdi-magnify</v-icon>
+          </v-btn>
+        </div>
       </div>
-      <div class="col-md-3 d-flex justify-center align-center">
-        <v-btn color="amber" fab x-large dark @click="search()">
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-      </div>
-    </div>
-  </v-card-text>
+    </v-card-text>
   </v-card>
 </template>
 
@@ -46,7 +56,8 @@ import {City} from "@/models/City";
 
 @Component
 export default class Search extends Vue {
-    @Prop() private cities: City[];
+    @Prop() public cities: City[];
+    @Prop() public reduceSize: boolean = false;
     private recentCitiesValue: City[] = [];
     private city = '';
     private range = 0;
@@ -89,5 +100,27 @@ export default class Search extends Vue {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+  .search-wrapper {
+    width: 900px;
+    z-index: 9;
+    .cityInput{
+      padding-top: 0;
+    }
+    .rangeInput{
+      padding-top: 10px;
+    }
+    .search-btn{
+      height: 60px;
+      min-width: 60px;
+    }
+
+    &.small{
+      height: 130px;
+      .search-btn{
+        height: 50px;
+        min-width: 50px;
+      }
+    }
+  }
 </style>

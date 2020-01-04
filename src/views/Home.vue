@@ -1,7 +1,7 @@
 <template>
-  <div class="search-wrapper">
-    <Search class="search" @searchCities="searchCities" @searchZoo="searchZoo" :cities="cities" />
-    <Map class="map" :zoos="zoos" />
+  <div class="home-wrapper">
+    <Search class="search" :reduce-size="reduceSearchSize" @searchCities="searchCities" @searchZoo="searchZoo" :cities="cities" />
+    <Map class="map" :show-map="showMap" :zoos="zoos" />
   </div>
 </template>
 
@@ -23,6 +23,8 @@ import {Zoo} from "@/models/Zoo";
 export default class Home extends Vue {
     private cities: City[] = [];
     private zoos: Zoo[] = [];
+    private showMap: boolean = false;
+    private reduceSearchSize: boolean = false;
 
     private searchCities(value: string) {
         this.$store.dispatch('findCities', value);
@@ -42,18 +44,29 @@ export default class Home extends Vue {
             (state, getters) => getters.zoos,
             (value: Zoo[]) => this.zoos = value
         );
+
+        this.$watch('zoos', () => {
+            if (this.zoos.length > 0) {
+                this.showMap = true;
+                this.reduceSearchSize = true;
+            }
+        });
     }
 }
 </script>
 <style scoped lang="scss">
-  .search-wrapper{
+  .home-wrapper{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
     min-height: calc(100vh - 64px);
-    .search{
+    .search, .map{
       width: 900px;
+    }
+    .map{
+      height: 400px;
     }
   }
 </style>

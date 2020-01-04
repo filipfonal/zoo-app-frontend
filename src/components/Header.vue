@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="amber" dark>
+  <v-app-bar class="app-bar" app color="amber" dark>
     <div class="d-flex align-center">
       <h2>Zoo App</h2>
     </div>
@@ -37,5 +37,7 @@ export default class Header extends Vue {
 </script>
 
 <style scoped>
-
+.app-bar{
+  z-index: 99;
+}
 </style>
