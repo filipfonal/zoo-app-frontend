@@ -25,7 +25,7 @@
               <v-slider
                       class="rangeInput"
                       v-model="range"
-                      label="Szukaj w odległości (km)"
+                      label="Search in range (km)"
                       step="10"
                       min="0"
                       max="500"
@@ -56,24 +56,18 @@ import {City} from "@/models/City";
 
 @Component
 export default class Search extends Vue {
-    @Prop() public cities: City[];
+    @Prop() public cities: City[] = [];
     @Prop() public reduceSize: boolean = false;
-    private recentCitiesValue: City[] = [];
     private city = '';
     private range = 0;
 
     private created(): void {
         this.$watch('city', _.debounce((value) => {
-            if (value && value !== '') {
+            if (this.shouldEmit(value)) {
+                console.log(value);
                 this.$emit('searchCities', value);
             }
         }, 300));
-
-        this.$watch('cities', (value: City[]) => {
-            if (value.length > 0) {
-                this.recentCitiesValue = value;
-            }
-        })
     }
 
     private search(): void {
@@ -91,11 +85,16 @@ export default class Search extends Vue {
     }
 
     private getFullCityObject(cityFullName: string): City {
-        return <City>this.recentCitiesValue.find(city => city.fullName === cityFullName);
+        return <City>this.cities.find(city => city.fullName === cityFullName);
     }
 
     private cityFilter(item: any, queryText: string, itemText: string): boolean {
         return itemText.toLocaleLowerCase().includes(queryText[0].toLocaleLowerCase());
+    }
+
+    private shouldEmit(value: string) {
+        return value && value !== '' && !value.includes(',');
+
     }
 }
 </script>
@@ -103,7 +102,7 @@ export default class Search extends Vue {
 <style lang="scss" scoped>
   .search-wrapper {
     width: 900px;
-    z-index: 9;
+    z-index: 999 !important;
     .cityInput{
       padding-top: 0;
     }
