@@ -64,7 +64,6 @@ export default class Search extends Vue {
     private created(): void {
         this.$watch('city', _.debounce((value) => {
             if (this.shouldEmit(value)) {
-                console.log(value);
                 this.$emit('searchCities', value);
             }
         }, 300));
