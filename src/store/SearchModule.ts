@@ -1,6 +1,6 @@
 import {Action, Module, Mutation, VuexModule} from 'vuex-module-decorators';
 import {apolloClient} from '@/main';
-import {FIND_CITIES_QUERY, FIND_NEARBY_ZOOS} from '@/graphql/queries';
+import {FIND_CITIES_QUERY, FIND_NEARBY_ZOOS, GET_SINGLE_ZOO} from '@/graphql/queries';
 import {ZooSearchForm} from '@/models/ZooSearchForm';
 import {City} from '@/models/City';
 import {Zoo} from '@/models/Zoo';

@@ -30,7 +30,7 @@ export const FIND_NEARBY_ZOOS = gql`
 `;
 
 export const GET_SINGLE_ZOO = gql`
-    query zoo($id: Int!) {
+    query zoo($id: String!) {
         zoo(id: $id){
             id
             name
