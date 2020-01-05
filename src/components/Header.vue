@@ -38,6 +38,6 @@ export default class Header extends Vue {
 
 <style scoped>
 .app-bar{
-  z-index: 99;
+  z-index: 9999 !important;
 }
 </style>

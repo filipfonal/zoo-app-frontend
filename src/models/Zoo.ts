@@ -1,3 +1,5 @@
+import {Review} from "@/models/Review";
+
 export interface Zoo {
     id: number;
     name: string;
@@ -5,15 +7,17 @@ export interface Zoo {
         longitude: number;
         latitude: number;
     };
-    description: string;
     logo: string;
-    wikipediaLink: string;
-    address: {
+    description?: string;
+    wikipediaLink?: string;
+    address?: {
         full: string;
         city: string;
         state: string;
         country: string;
         countryCode: string;
     };
+    myReview?: Review;
+    recentReviews?: Review[];
     rating: number;
 }
