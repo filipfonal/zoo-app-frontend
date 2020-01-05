@@ -1,5 +1,10 @@
 <template>
-  <ZooHeader :zoo="zoo"/>
+  <div class="zoo-view" v-if="zoo">
+    <ZooHeader :zoo="zoo"/>
+    <ZooDescription class="card" :zoo="zoo"/>
+    <ZooLocation class="card" :zoo="zoo" />
+    <ZooRecentReviews class="card" :zoo="zoo" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -8,10 +13,16 @@ import Vue from 'vue';
 import {apolloClient} from "@/main";
 import {GET_SINGLE_ZOO} from "@/graphql/queries";
 import ZooHeader from "@/components/ZooHeader.vue";
+import ZooDescription from "@/components/ZooDescription.vue";
+import ZooLocation from "@/components/ZooLocation.vue";
+import ZooRecentReviews from "@/components/ZooRecentReviews.vue";
 
 @Component({
     components:{
-        ZooHeader
+        ZooHeader,
+        ZooDescription,
+        ZooLocation,
+        ZooRecentReviews
     }
 })
 export default class Zoo extends Vue {
@@ -38,5 +49,7 @@ export default class Zoo extends Vue {
 </script>
 
 <style lang="scss" scoped>
-
+  .card{
+    padding-bottom: 50px;
+  }
 </style>

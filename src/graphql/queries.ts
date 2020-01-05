@@ -22,7 +22,6 @@ export const FIND_NEARBY_ZOOS = gql`
                 longitude
                 latitude
             }
-            description
             logo
             rating
         }

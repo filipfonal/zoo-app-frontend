@@ -1,16 +1,24 @@
 <template>
-  <div class="zoo-wrapper" v-if="zoo">
+  <div class="zoo-wrapper">
     <div class="zoo-header">
-      <v-avatar class="zoo-logo" color="grey" size="200" >
+      <v-avatar class="zoo-logo" color="white" size="200">
         <v-img v-if="zoo.logo" :src="zoo.logo"></v-img>
         <v-img v-else src="@/assets/zoo.jpg"></v-img>
       </v-avatar>
-      <h1 class="zoo-title">Zoo {{ zoo.name }}</h1>
+      <div class="zoo-title">
+        <h1>{{ zoo.name }}</h1>
+        <star-rating
+                :rating="zoo.rating"
+                :increment="0.1"
+                read-only
+                :show-rating="false"
+                :star-size="15"></star-rating>
+      </div>
       <div class="zoo-buttons-bar">
         <v-btn class="mx-2" fab dark x-small color="pink">
           <v-icon dark>mdi-heart</v-icon>
         </v-btn>
-        <v-btn depressed small>Wystaw opinię</v-btn>
+        <v-btn depressed small>Feedback</v-btn>
       </div>
     </div>
     <v-divider></v-divider>
@@ -24,7 +32,7 @@ import {Zoo} from "@/models/Zoo";
 
 @Component
 export default class ZooHeader extends Vue {
-    @Prop() public zoo: Zoo | null = null;
+    @Prop() public zoo?: Zoo;
 
 }
 </script>
@@ -33,6 +41,7 @@ export default class ZooHeader extends Vue {
   .zoo-wrapper{
     position: relative;
     background-color: #4c442b;
+    margin-bottom: 120px;
     &:after{
       content: "";
       background: url("~@/assets/landing.jpg");
@@ -59,7 +68,7 @@ export default class ZooHeader extends Vue {
         color: #fff;
         text-shadow: 3px 2px 3px rgba(255,255,255,.2), 2px 1px 10px #000000;
         position: absolute;
-        top: 200px;
+        top: 180px;
         left: 300px;
         z-index: 1;
       }

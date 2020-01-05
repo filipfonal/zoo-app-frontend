@@ -33,10 +33,7 @@ import {Component, Prop} from 'vue-property-decorator';
 import {Zoo} from "@/models/Zoo";
 import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
 import 'leaflet/dist/leaflet.css'
-
-export const DEFAULT_MAP_CENTER = [47.413220, -1.219482];
-export const DEFAULT_MAP_ZOOM = 12;
-export const MAP_URL = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
+import {DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM, MAP_URL} from "@/consts";
 
 @Component({
     components: {
@@ -47,7 +44,7 @@ export const MAP_URL = 'http://{s}.tile.osm.org/{z}/{x}/{y}.png';
     }
 })
 export default class Map extends Vue {
-    @Prop() public zoos: Zoo[];
+    @Prop() public zoos?: Zoo[];
     @Prop() public showMap = false;
     private center = DEFAULT_MAP_CENTER;
     private zoom = DEFAULT_MAP_ZOOM;
@@ -61,7 +58,7 @@ export default class Map extends Vue {
 
     created() {
         this.$watch('zoos', () => {
-            if (this.zoos.length > 0) {
+            if (this.zoos && this.zoos.length > 0) {
                 this.center = [this.zoos[0].location.latitude, this.zoos[0].location.longitude];
 
                 this.markers = [];
