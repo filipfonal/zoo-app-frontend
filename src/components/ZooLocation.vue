@@ -25,32 +25,33 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import {Zoo} from "@/models/Zoo";
-import {LMap, LMarker, LTileLayer} from "vue2-leaflet";
-import {DEFAULT_MAP_ZOOM, MAP_URL} from "@/consts";
+import {Zoo} from '@/models/Zoo';
+import { LMap, LMarker, LTileLayer} from 'vue2-leaflet';
+import {DEFAULT_MAP_ZOOM, MAP_URL} from '@/consts';
+import L from 'leaflet';
 
 @Component({
-    components:{
+    components: {
         LMap,
         LTileLayer,
         LMarker,
-    }
+    },
 })
 export default class ZooLocation extends Vue {
     @Prop() public zoo?: Zoo;
     private zoom = DEFAULT_MAP_ZOOM;
     private url = MAP_URL;
-    private center;
-    private markerPosition;
+    private center!: number[];
+    private markerPosition!: any;
     private markerIcon = L.icon({
         iconUrl: require('@/assets/marker.png'),
         iconSize: [30, 40],
-        iconAnchor: [20, 20]
+        iconAnchor: [20, 20],
     });
 
-    created() {
+    public created() {
         if (this.zoo) {
-            this.markerPosition = L.latLng(this.zoo.location.latitude, this.zoo.location.longitude)
+            this.markerPosition = L.latLng(this.zoo.location.latitude, this.zoo.location.longitude);
             this.center = [this.zoo.location.latitude, this.zoo.location.longitude];
         }
     }

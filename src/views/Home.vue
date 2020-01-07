@@ -10,14 +10,14 @@ import Component from 'vue-class-component';
 import Vue from 'vue';
 import Search from '@/components/Search.vue';
 import Map from '@/components/Map.vue';
-import {ZooSearchForm} from "@/models/ZooSearchForm";
-import {City} from "@/models/City";
-import {Zoo} from "@/models/Zoo";
+import {ZooSearchForm} from '@/models/ZooSearchForm';
+import {City} from '@/models/City';
+import {Zoo} from '@/models/Zoo';
 
 @Component({
     components: {
         Search,
-        Map
+        Map,
     },
 })
 export default class Home extends Vue {
@@ -41,12 +41,12 @@ export default class Home extends Vue {
     private created(): void {
         this.$store.watch(
             (state, getters) => getters.cities,
-            (value: City[]) => this.cities = value
+            (value: City[]) => this.cities = value,
         );
 
         this.$store.watch(
             (state, getters) => getters.zoos,
-            (value: Zoo[]) => this.zoos = value
+            (value: Zoo[]) => this.zoos = value,
         );
 
         this.$watch('zoos', () => {

@@ -22,7 +22,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import {Zoo} from "@/models/Zoo";
+import {Zoo} from '@/models/Zoo';
 
 @Component
 export default class ZooDescription extends Vue {

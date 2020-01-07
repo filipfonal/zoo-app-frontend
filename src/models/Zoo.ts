@@ -1,4 +1,4 @@
-import {Review} from "@/models/Review";
+import {Review} from '@/models/Review';
 
 export interface Zoo {
     id: number;

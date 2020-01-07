@@ -30,18 +30,19 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import {Zoo} from "@/models/Zoo";
-import { LMap, LTileLayer, LMarker, LPopup } from 'vue2-leaflet';
-import 'leaflet/dist/leaflet.css'
-import {DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM, MAP_URL} from "@/consts";
+import {Zoo} from '@/models/Zoo';
+import {LMap, LTileLayer, LMarker, LPopup} from 'vue2-leaflet';
+import 'leaflet/dist/leaflet.css';
+import {DEFAULT_MAP_CENTER, DEFAULT_MAP_ZOOM, MAP_URL} from '@/consts';
+import L from 'leaflet';
 
 @Component({
     components: {
         LMap,
         LTileLayer,
         LMarker,
-        LPopup
-    }
+        LPopup,
+    },
 })
 export default class Map extends Vue {
     @Prop() public zoos?: Zoo[];
@@ -49,14 +50,14 @@ export default class Map extends Vue {
     private center = DEFAULT_MAP_CENTER;
     private zoom = DEFAULT_MAP_ZOOM;
     private url = MAP_URL;
-    private markers = [];
+    private markers: any[] = [];
     private markerIcon = L.icon({
         iconUrl: require('@/assets/marker.png'),
         iconSize: [30, 40],
-        iconAnchor: [20, 20]
+        iconAnchor: [20, 20],
     });
 
-    created() {
+    public created() {
         this.$watch('zoos', () => {
             if (this.zoos && this.zoos.length > 0) {
                 this.center = [this.zoos[0].location.latitude, this.zoos[0].location.longitude];
@@ -71,12 +72,12 @@ export default class Map extends Vue {
                         logo: zoo.logo,
                         rating: zoo.rating,
                     });
-                })
+                });
             }
-        })
+        });
     }
 
-    selectZoo(id: number) {
+    private selectZoo(id: number) {
         this.$emit('selectedZoo', id);
     }
 }

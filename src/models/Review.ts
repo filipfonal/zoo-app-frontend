@@ -4,7 +4,7 @@ export interface Review {
         id: string;
         name: string;
         email: string;
-    },
+    };
     zooId: string;
     rating: number;
     content: string;

@@ -22,13 +22,13 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import {Zoo} from "@/models/Zoo";
-import Review from "@/components/Review.vue";
+import {Zoo} from '@/models/Zoo';
+import Review from '@/components/Review.vue';
 
 @Component({
     components: {
-        Review
-    }
+        Review,
+    },
 })
 export default class ZooRecentReviews extends Vue {
     @Prop() public zoo?: Zoo;

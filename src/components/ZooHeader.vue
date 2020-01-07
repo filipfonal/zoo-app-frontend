@@ -28,7 +28,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import {Zoo} from "@/models/Zoo";
+import {Zoo} from '@/models/Zoo';
 
 @Component
 export default class ZooHeader extends Vue {
@@ -71,11 +71,14 @@ export default class ZooHeader extends Vue {
         top: 180px;
         left: 300px;
         z-index: 1;
+        h1{
+          margin: 0;
+        }
       }
       .zoo-buttons-bar{
         z-index: 1;
         position: relative;
-        top: 90px;
+        top: 100px;
         .v-btn{
           margin-left: 6px;
         }

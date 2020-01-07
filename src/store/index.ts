@@ -10,6 +10,6 @@ export const store = new Vuex.Store({
   modules: {
     AuthModule,
     NotificationModule,
-    SearchModule
+    SearchModule,
   },
 });

@@ -10,25 +10,25 @@
 <script lang="ts">
 import Component from 'vue-class-component';
 import Vue from 'vue';
-import {apolloClient} from "@/main";
-import {GET_SINGLE_ZOO} from "@/graphql/queries";
-import ZooHeader from "@/components/ZooHeader.vue";
-import ZooDescription from "@/components/ZooDescription.vue";
-import ZooLocation from "@/components/ZooLocation.vue";
-import ZooRecentReviews from "@/components/ZooRecentReviews.vue";
+import {apolloClient} from '@/main';
+import {GET_SINGLE_ZOO} from '@/graphql/queries';
+import ZooHeader from '@/components/ZooHeader.vue';
+import ZooDescription from '@/components/ZooDescription.vue';
+import ZooLocation from '@/components/ZooLocation.vue';
+import ZooRecentReviews from '@/components/ZooRecentReviews.vue';
 
 @Component({
-    components:{
+    components: {
         ZooHeader,
         ZooDescription,
         ZooLocation,
-        ZooRecentReviews
-    }
+        ZooRecentReviews,
+    },
 })
 export default class Zoo extends Vue {
     private zoo: Zoo | null = null;
 
-    created() {
+    public created() {
         apolloClient.query({
             query: GET_SINGLE_ZOO,
             variables: {

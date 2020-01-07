@@ -22,7 +22,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
-import {Review as ReviewModel} from "@/models/Review";
+import {Review as ReviewModel} from '@/models/Review';
 
 @Component
 export default class Review extends Vue {

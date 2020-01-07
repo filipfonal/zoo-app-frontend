@@ -51,8 +51,8 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import _ from 'lodash';
-import {ZooSearchForm} from "@/models/ZooSearchForm";
-import {City} from "@/models/City";
+import {ZooSearchForm} from '@/models/ZooSearchForm';
+import {City} from '@/models/City';
 
 @Component
 export default class Search extends Vue {
@@ -79,12 +79,12 @@ export default class Search extends Vue {
         return {
             latitude: city.location.latitude,
             longitude: city.location.longitude,
-            range: this.range
-        }
+            range: this.range,
+        };
     }
 
     private getFullCityObject(cityFullName: string): City {
-        return <City>this.cities.find(city => city.fullName === cityFullName);
+        return this.cities.find(city => city.fullName === cityFullName) as City;
     }
 
     private cityFilter(item: any, queryText: string, itemText: string): boolean {
