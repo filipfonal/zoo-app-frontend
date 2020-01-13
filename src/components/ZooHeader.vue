@@ -18,7 +18,7 @@
         <v-btn class="mx-2" fab dark x-small color="pink">
           <v-icon dark>mdi-heart</v-icon>
         </v-btn>
-        <v-btn depressed small>Feedback</v-btn>
+        <FeedbackAdder :zoo="zoo" class="feedback-button"/>
       </div>
     </div>
     <v-divider></v-divider>
@@ -29,8 +29,11 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import {Zoo} from '@/models/Zoo';
+import FeedbackAdder from "@/components/addReviewButtons/FeedbackAdder.vue";
 
-@Component
+@Component({
+    components: {FeedbackAdder}
+})
 export default class ZooHeader extends Vue {
     @Prop() public zoo?: Zoo;
 
@@ -79,7 +82,8 @@ export default class ZooHeader extends Vue {
         z-index: 1;
         position: relative;
         top: 100px;
-        .v-btn{
+        display: flex;
+        .feedback-button {
           margin-left: 6px;
         }
       }

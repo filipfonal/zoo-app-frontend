@@ -22,3 +22,32 @@ export const CREATE_USER_MUTATION = gql`
         }
     }
 `;
+
+export const POST_REVIEW_MUTATION = gql`
+    mutation postReview($zooId: String!, $rating: Int!, $content: String!) {
+        postReview(
+            zooId: $zooId
+            rating: $rating
+            content: $content
+        ){
+            id
+            user {
+                id
+                name
+                email
+            }
+            zooId
+            rating
+            content
+            createdAt
+        }
+    }
+`;
+
+export const DELETE_REVIEW_MUTATION = gql`
+    mutation deleteReview($id: String!) {
+        deleteReview(
+            id: $id
+        )
+    }
+`;
