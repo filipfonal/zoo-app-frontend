@@ -26,26 +26,29 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
-import {Zoo} from '@/models/Zoo';
-import FeedbackAdder from "@/components/addReviewButtons/FeedbackAdder.vue";
+    import Vue from 'vue';
+    import {Component, Prop} from 'vue-property-decorator';
+    import {Zoo} from '@/models/Zoo';
+    import FeedbackAdder from '@/components/addReviewButtons/FeedbackAdder.vue';
 
-@Component({
-    components: {FeedbackAdder}
-})
-export default class ZooHeader extends Vue {
-    @Prop() public zoo?: Zoo;
+    @Component({
+        components: {
+            FeedbackAdder,
+        },
+    })
+    export default class ZooHeader extends Vue {
+        @Prop() public zoo?: Zoo;
 
-}
+    }
 </script>
 
 <style lang="scss" scoped>
-  .zoo-wrapper{
+  .zoo-wrapper {
     position: relative;
     background-color: #4c442b;
     margin-bottom: 120px;
-    &:after{
+
+    &:after {
       content: "";
       background: url("~@/assets/landing.jpg");
       background-position-y: 25%;
@@ -57,32 +60,38 @@ export default class ZooHeader extends Vue {
       right: 0;
       position: absolute;
     }
-    .zoo-header{
+
+    .zoo-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 2em 4em;
       position: relative;
-      .zoo-logo{
+
+      .zoo-logo {
         top: 120px;
         z-index: 1;
       }
-      .zoo-title{
+
+      .zoo-title {
         color: #fff;
-        text-shadow: 3px 2px 3px rgba(255,255,255,.2), 2px 1px 10px #000000;
+        text-shadow: 3px 2px 3px rgba(255, 255, 255, .2), 2px 1px 10px #000000;
         position: absolute;
         top: 180px;
         left: 300px;
         z-index: 1;
-        h1{
+
+        h1 {
           margin: 0;
         }
       }
-      .zoo-buttons-bar{
+
+      .zoo-buttons-bar {
         z-index: 1;
         position: relative;
         top: 100px;
         display: flex;
+
         .feedback-button {
           margin-left: 6px;
         }

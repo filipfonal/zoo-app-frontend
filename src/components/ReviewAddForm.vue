@@ -46,10 +46,10 @@
     import Vue from 'vue';
     import {Component, Prop} from 'vue-property-decorator';
     import {Zoo} from '@/models/Zoo';
-    import {Review} from "@/models/Review";
+    import {Review} from '@/models/Review';
 
     @Component({})
-    export default class ReviewForm extends Vue {
+    export default class ReviewAddForm extends Vue {
         @Prop() public zoo?: Zoo;
         @Prop() public review?: Review;
 
