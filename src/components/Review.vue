@@ -10,6 +10,7 @@
                 read-only
                 :show-rating="false"
                 :star-size="15"></star-rating>
+        <DeleteReview :review="review" />
       </div>
       <div class="col-md-8">
         {{ review.content }}
@@ -23,8 +24,14 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import {Review as ReviewModel} from '@/models/Review';
+import DeleteReview from "@/components/DeleteReview.vue";
 
-@Component
+@Component({
+    components: {
+        DeleteReview,
+    },
+})
+
 export default class Review extends Vue {
     @Prop() public review?: ReviewModel;
 }

@@ -11,9 +11,7 @@
         <v-btn text color="amber accent-4">
           View all
         </v-btn>
-        <v-btn text color="amber accent-4">
-          Add review
-        </v-btn>
+        <RecentReviewsAdder :zoo="zoo" class="feedback-button" />
       </v-card-actions>
     </v-card>
   </div>
@@ -24,12 +22,15 @@ import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import {Zoo} from '@/models/Zoo';
 import Review from '@/components/Review.vue';
+import RecentReviewsAdder from '@/components/addReviewButtons/RecentReviewsAdder.vue';
 
 @Component({
     components: {
         Review,
+        RecentReviewsAdder,
     },
 })
+
 export default class ZooRecentReviews extends Vue {
     @Prop() public zoo?: Zoo;
 }

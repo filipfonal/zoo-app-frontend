@@ -1,17 +1,18 @@
 <template>
   <v-app-bar class="app-bar" app color="amber" dark>
     <div class="d-flex align-center">
-      <h2>Zoo App</h2>
+      <router-link :to="{name: 'home'}" class="header">
+        <h2>Zoo App</h2>
+      </router-link>
     </div>
 
     <v-spacer></v-spacer>
 
-
     <v-menu :offset-y="true">
       <template v-slot:activator="{ on }">
-          <v-btn icon dark color="white" v-on="on">
-            <v-icon dark>mdi-dots-vertical</v-icon>
-          </v-btn>
+        <v-btn icon dark color="white" v-on="on">
+          <v-icon dark>mdi-dots-vertical</v-icon>
+        </v-btn>
       </template>
       <v-list>
 
@@ -25,19 +26,24 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+    import Vue from 'vue';
+    import {Component} from 'vue-property-decorator';
 
-@Component
-export default class Header extends Vue {
-    private logout() {
-        this.$store.dispatch('logout');
+    @Component
+    export default class Header extends Vue {
+        private logout() {
+            this.$store.dispatch('logout');
+        }
     }
-}
 </script>
 
 <style scoped>
-.app-bar{
-  z-index: 9999 !important;
-}
+  .app-bar {
+    z-index: 9999 !important;
+  }
+
+  .header {
+    text-decoration: none;
+    color: white;
+  }
 </style>
