@@ -4,7 +4,7 @@
       <template v-slot:activator="{ on }">
         <v-btn depressed small v-on="on">Feedback</v-btn>
       </template>
-      <ReviewForm :zoo="zoo" :review="review" @closeDialog="closeDialog" @submitReview="submitReview" />
+      <ReviewAddForm :zoo="zoo" :review="review" @closeDialog="closeDialog" @submitReview="submitReview" />
     </v-dialog>
   </v-row>
 </template>
@@ -13,11 +13,11 @@
     import Vue from 'vue';
     import {Component, Prop} from 'vue-property-decorator';
     import {Zoo} from '@/models/Zoo';
-    import {Review} from "@/models/Review";
-    import ReviewForm from '@/components/ReviewForm.vue';
+    import {Review} from '@/models/Review';
+    import ReviewAddForm from '@/components/ReviewAddForm.vue';
 
     @Component({
-        components: {ReviewForm},
+        components: {ReviewAddForm},
     })
     export default class ZooReviewAdder extends Vue {
         @Prop() public zoo?: Zoo;

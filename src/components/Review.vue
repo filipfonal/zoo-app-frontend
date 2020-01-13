@@ -10,7 +10,10 @@
                 read-only
                 :show-rating="false"
                 :star-size="15"></star-rating>
-        <DeleteReview :review="review" />
+        <div class="options">
+          <DeleteReview :review="review" />
+          <EditReview :review="review" />
+        </div>
       </div>
       <div class="col-md-8">
         {{ review.content }}
@@ -24,10 +27,12 @@
 import Vue from 'vue';
 import {Component, Prop} from 'vue-property-decorator';
 import {Review as ReviewModel} from '@/models/Review';
-import DeleteReview from "@/components/DeleteReview.vue";
+import DeleteReview from '@/components/DeleteReview.vue';
+import EditReview from '@/components/EditReview.vue';
 
 @Component({
     components: {
+        EditReview,
         DeleteReview,
     },
 })
@@ -46,6 +51,10 @@ export default class Review extends Vue {
     }
     .review-date{
       margin-bottom: 0;
+    }
+    .options{
+      display: flex;
+      padding-top: 10px;
     }
   }
 </style>

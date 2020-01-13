@@ -51,3 +51,24 @@ export const DELETE_REVIEW_MUTATION = gql`
         )
     }
 `;
+
+export const UPDATE_REVIEW_MUTATION = gql`
+    mutation updateReview($id: String!, $rating: Int!, $content: String!) {
+        updateReview(
+            id: $id
+            rating: $rating
+            content: $content
+        ){
+            id
+            user {
+                id
+                name
+                email
+            }
+            zooId
+            rating
+            content
+            createdAt
+        }
+    }
+`;
