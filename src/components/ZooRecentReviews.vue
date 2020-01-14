@@ -4,7 +4,7 @@
       <v-card-text>
         <div>Recent Reviews</div>
         <div class="reviews text--primary">
-          <Review v-for="review in zoo.recentReviews" :review="review" />
+          <Review v-for="review in zoo.recentReviews" :review="review" :myReview="zoo.myReview"/>
         </div>
       </v-card-text>
       <v-card-actions>
