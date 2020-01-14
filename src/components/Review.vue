@@ -10,7 +10,7 @@
                 read-only
                 :show-rating="false"
                 :star-size="15"></star-rating>
-        <div class="options">
+        <div class="options" v-if="myReview && myReview.id === review.id">
           <DeleteReview :review="review" />
           <EditReview :review="review" />
         </div>
@@ -39,6 +39,7 @@ import EditReview from '@/components/EditReview.vue';
 
 export default class Review extends Vue {
     @Prop() public review?: ReviewModel;
+    @Prop() public myReview?: ReviewModel;
 }
 </script>
 
