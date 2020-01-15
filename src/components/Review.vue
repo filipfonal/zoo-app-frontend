@@ -2,14 +2,16 @@
   <div class="review">
     <div class="row">
       <div class="col-md-4">
-        <p class="review-user">{{ review.user.name }}</p>
+        <router-link :to="{name: 'user', params: {id: review.user.id}}" class="username">
+          <p class="review-user">{{ review.user.name }}</p>
+        </router-link>
         <p class="review-date">{{ review.createdAt }}</p>
         <star-rating
                 :rating="review.rating"
                 :increment="0.1"
                 read-only
                 :show-rating="false"
-                :star-size="15"></star-rating>
+                :star-size="15"/>
         <div class="options" v-if="myReview && myReview.id === review.id">
           <DeleteReview :review="review" />
           <EditReview :review="review" />
@@ -19,7 +21,7 @@
         {{ review.content }}
       </div>
     </div>
-    <v-divider></v-divider>
+    <v-divider/>
   </div>
 </template>
 
@@ -46,6 +48,13 @@ export default class Review extends Vue {
 <style lang="scss" scoped>
   .review{
     width: 100%;
+    .username{
+      text-decoration: none !important;
+      color: black;
+    }
+    .username:hover{
+      color: #2196f3;
+    }
     .review-user{
       margin-bottom: 0;
       font-weight: bold;
