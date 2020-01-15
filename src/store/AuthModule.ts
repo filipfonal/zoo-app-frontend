@@ -1,7 +1,9 @@
 import {Action, Module, Mutation, VuexModule} from 'vuex-module-decorators';
 import {CREATE_USER_MUTATION, ISSUE_TOKEN_MUTATION} from '@/graphql/mutations';
-import {apolloClient, token} from '@/main';
+import {apolloClient, token, authUserData} from '@/main';
 import router from '@/router';
+import {store} from '@/store';
+import { GET_AUTH_DATA_MUTATION } from '@/graphql/queries';
 
 export interface AuthState {
     isLoggedIn: boolean;
@@ -14,10 +16,16 @@ export default class AuthModule extends VuexModule {
     public get isLoggedIn() {
         return this.data.isLoggedIn;
     }
+    private authData: object = authUserData ? authUserData : {};
 
     @Mutation
     public setAuthState(payload: any) {
         this.data.isLoggedIn = payload.isLoggedIn;
+    }
+
+    @Mutation
+    public setAuthData(payload: any) {
+        this.authData = payload.auth;
     }
 
     @Mutation
@@ -38,6 +46,7 @@ export default class AuthModule extends VuexModule {
                 isLoggedIn: true,
             });
             localStorage.setItem('auth_token', response.data.issueToken);
+            store.dispatch('getAuthData');
             router.push('/');
         }, ({graphQLErrors}) => {
             this.context.dispatch('notify', {
@@ -74,7 +83,21 @@ export default class AuthModule extends VuexModule {
         this.context.commit('setAuthState', {
             isLoggedIn: false,
         });
+        this.context.commit('setAuthData', {});
         localStorage.removeItem('auth_token');
+        localStorage.removeItem('auth_data');
         router.push('/auth');
+    }
+
+    @Action
+    public getAuthData() {
+        apolloClient.mutate({
+            mutation: GET_AUTH_DATA_MUTATION,
+        }).then((response) => {
+            localStorage.setItem('auth_data', JSON.stringify(response.data.me));
+            this.context.commit('setAuthData', {
+                auth: response.data.me,
+            });
+        });
     }
 }
