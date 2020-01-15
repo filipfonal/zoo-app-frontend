@@ -13,6 +13,16 @@ export const FIND_CITIES_QUERY = gql`
     }
 `;
 
+export const GET_AUTH_DATA_MUTATION = gql`
+    query getAuthData {
+        me {
+            id,
+            name,
+            email
+        }
+    }
+`;
+
 export const FIND_NEARBY_ZOOS = gql`
     query findNearbyZoos($longitude: Float!, $latitude: Float!, $range: Int!) {
         findNearbyZoos(longitude: $longitude, latitude: $latitude, range: $range){
