@@ -15,11 +15,13 @@
         </v-btn>
       </template>
       <v-list>
+        <v-list-item v-for="route in routes" @click="">
+          <v-list-item-title>{{ route.name }}</v-list-item-title>
+        </v-list-item>
 
         <v-list-item @click="logout()">
           <v-list-item-title>Logout</v-list-item-title>
         </v-list-item>
-
       </v-list>
     </v-menu>
   </v-app-bar>
@@ -31,6 +33,11 @@
 
     @Component
     export default class Header extends Vue {
+        private routes = [
+            {name: "Profile"},
+            {name: "Friends"},
+        ];
+
         private logout() {
             this.$store.dispatch('logout');
         }

@@ -85,3 +85,19 @@ export const GET_SINGLE_ZOO = gql`
         }
     }
 `;
+
+export const GET_SINGLE_USER = gql`
+    query user($id: String!) {
+        user(id: $id) {
+            id
+            name
+            email
+            reviews {
+                id
+                zooId
+                content
+                rating
+            }
+        }
+    }
+`;

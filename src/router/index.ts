@@ -4,6 +4,7 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import Home from '@/views/Home.vue';
 import Auth from '@/views/Auth.vue';
 import Zoo from '@/views/Zoo.vue';
+import User from '@/views/User.vue';
 
 Vue.use(VueRouter);
 
@@ -26,6 +27,11 @@ const routes = [
         path: 'auth',
         name: 'auth',
         component: Auth,
+      },
+      {
+        path: '/user/:id',
+        name: 'user',
+        component: User,
       },
     ],
   },
