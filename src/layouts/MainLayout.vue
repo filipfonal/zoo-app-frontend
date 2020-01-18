@@ -3,7 +3,7 @@
 
     <Alert :notification="notification"/>
 
-    <Header/>
+    <Header :isLoggedIn="isLoggedIn" />
 
     <v-content>
       <router-view></router-view>
@@ -16,16 +16,21 @@
 import {Component, Vue} from 'vue-property-decorator';
 import Header from '@/components/Header.vue';
 import Alert from '@/components/Alert.vue';
-import {Notification} from '@/models/Notification';
 
 @Component({
     components: {
         Header,
         Alert,
-    },
+    }
 })
 export default class MainLayout extends Vue {
-    private notification: Notification = this.$store.getters.notification;
+    get notification() {
+        return this.$store.getters.notification;
+    }
+
+    get isLoggedIn() {
+        return this.$store.getters.isLoggedIn;
+    }
 }
 </script>
 

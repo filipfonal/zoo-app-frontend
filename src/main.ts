@@ -33,5 +33,8 @@ new Vue({
   store,
   vuetify,
   apolloProvider,
+  beforeCreate() {
+    this.$store.commit('setInitialAuthState');
+  },
   render: (h) => h(App),
 }).$mount('#app');

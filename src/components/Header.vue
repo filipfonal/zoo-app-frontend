@@ -7,7 +7,7 @@
     <v-spacer></v-spacer>
 
 
-    <v-menu :offset-y="true">
+    <v-menu :offset-y="true" v-if="isLoggedIn">
       <template v-slot:activator="{ on }">
           <v-btn icon dark color="white" v-on="on">
             <v-icon dark>mdi-dots-vertical</v-icon>
@@ -26,10 +26,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import {Component} from 'vue-property-decorator';
+import {Component, Prop} from 'vue-property-decorator';
 
 @Component
 export default class Header extends Vue {
+    @Prop() public isLoggedIn?: boolean;
+
     private logout() {
         this.$store.dispatch('logout');
     }

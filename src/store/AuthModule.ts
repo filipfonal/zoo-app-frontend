@@ -9,11 +9,20 @@ export interface AuthState {
 
 @Module
 export default class AuthModule extends VuexModule {
-    private data: AuthState = token ? {isLoggedIn: true} : {isLoggedIn: false};
+    private data: AuthState = {isLoggedIn: false};
+
+    public get isLoggedIn() {
+        return this.data.isLoggedIn;
+    }
 
     @Mutation
     public setAuthState(payload: any) {
         this.data.isLoggedIn = payload.isLoggedIn;
+    }
+
+    @Mutation
+    public setInitialAuthState() {
+        this.data.isLoggedIn = !!token();
     }
 
     @Action
