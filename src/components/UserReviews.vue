@@ -2,7 +2,8 @@
   <div class="user-recent-reviews">
     <v-card class="mx-auto" max-width="900">
       <v-card-text>
-        <div>Recent Reviews</div>
+        <div v-if="authData && authData.id === user.id">Your Recent Reviews</div>
+        <div v-else>Recent Reviews</div>
         <div class="reviews text--primary">
           <div class="row" v-for="review in user.reviews" :review="review">
             <div class="col-md-4">
@@ -37,6 +38,7 @@ import {User} from '@/models/User';
 @Component
 export default class UserRecentReviews extends Vue {
     @Prop() public user?: User;
+    @Prop() public authData?: object;
 }
 </script>
 

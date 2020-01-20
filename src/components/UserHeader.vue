@@ -6,8 +6,9 @@
       </v-avatar>
       <div class="user-name">
         <h1>{{ user.name }}</h1>
+        <h3 v-if="authData && user.id === authData.id">Your profile</h3>
       </div>
-      <div class="user-buttons-bar">
+      <div class="user-buttons-bar" v-if="authData && user.id !== authData.id">
         <v-btn class="mx-2" fab dark x-small color="#32bda6">
           <v-icon dark>mdi-account-plus</v-icon>
         </v-btn>
@@ -25,6 +26,7 @@
     @Component
     export default class UserHeader extends Vue {
         @Prop() public user?: User;
+        @Prop() public authData?: object;
 
     }
 </script>

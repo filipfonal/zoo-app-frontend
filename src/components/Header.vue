@@ -8,6 +8,8 @@
 
     <v-spacer></v-spacer>
 
+    <div v-if="authData  && authData.name">Logged as {{ authData.name }}</div>
+
     <v-menu :offset-y="true" v-if="isLoggedIn">
       <template v-slot:activator="{ on }">
         <v-btn icon dark color="white" v-on="on">
@@ -15,8 +17,13 @@
         </v-btn>
       </template>
       <v-list>
-        <v-list-item v-for="route in routes" @click="">
-          <v-list-item-title>{{ route.name }}</v-list-item-title>
+        <router-link v-if="authData && authData.id" :to="{name: 'user', params: {id: authData.id}}" class="username">
+          <v-list-item>
+            <v-list-item-title>Profile</v-list-item-title>
+          </v-list-item>
+        </router-link>
+        <v-list-item @click="">
+          <v-list-item-title>Friends</v-list-item-title>
         </v-list-item>
 
         <v-list-item @click="logout()">
@@ -29,21 +36,18 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import {Component, Prop} from 'vue-property-decorator';
+    import Vue from 'vue';
+    import {Component, Prop} from 'vue-property-decorator';
 
-@Component
-export default class Header extends Vue {
-    @Prop() public isLoggedIn?: boolean;
-    private routes = [
-        {name: "Profile"},
-        {name: "Friends"},
-    ];
+    @Component
+    export default class Header extends Vue {
+        @Prop() public isLoggedIn?: boolean;
+        @Prop() public authData?: object;
 
-    private logout() {
-        this.$store.dispatch('logout');
+        private logout() {
+            this.$store.dispatch('logout');
+        }
     }
-}
 </script>
 
 <style scoped>
@@ -54,5 +58,10 @@ export default class Header extends Vue {
   .header{
     text-decoration: none;
     color: white;
+  }
+
+  .username{
+    text-decoration: none !important;
+    color: black;
   }
 </style>

@@ -3,7 +3,7 @@
 
     <Alert :notification="notification"/>
 
-    <Header :isLoggedIn="isLoggedIn" />
+    <Header :isLoggedIn="isLoggedIn" :authData="authData"/>
 
     <v-content>
       <router-view></router-view>
@@ -30,6 +30,10 @@ export default class MainLayout extends Vue {
 
     get isLoggedIn() {
         return this.$store.getters.isLoggedIn;
+    }
+
+    get authData() {
+        return this.$store.getters.authData;
     }
 }
 </script>

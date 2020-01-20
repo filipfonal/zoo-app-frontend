@@ -1,7 +1,7 @@
 <template>
   <div class="user-view" v-if="user">
-    <UserHeader :user="user"/>
-    <UserReviews :user="user"/>
+    <UserHeader :user="user" :authData="authData"/>
+    <UserReviews :user="user" :authData="authData"/>
   </div>
 </template>
 
@@ -21,6 +21,10 @@ import UserReviews from '@/components/UserReviews.vue';
 })
 export default class User extends Vue {
     private user: User | null = null;
+
+    get authData() {
+        return this.$store.getters.authData;
+    }
 
     public created(): void {
         apolloClient.query({
