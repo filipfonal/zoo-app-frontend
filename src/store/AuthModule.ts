@@ -1,6 +1,6 @@
 import {Action, Module, Mutation, VuexModule} from 'vuex-module-decorators';
 import {CREATE_USER_MUTATION, ISSUE_TOKEN_MUTATION} from '@/graphql/mutations';
-import {apolloClient, token} from '@/main';
+import {apolloClient, token, authUserData} from '@/main';
 import router from '@/router';
 import {store} from '@/store';
 import {GET_AUTH_DATA_MUTATION} from '@/graphql/queries';
@@ -87,6 +87,8 @@ export default class AuthModule extends VuexModule {
     public logout() {
         this.context.commit('setAuthState', {
             isLoggedIn: false,
+        });
+        this.context.commit('setAuthData', {
             auth: {},
         });
         localStorage.removeItem('auth_token');
