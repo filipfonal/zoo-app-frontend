@@ -10,6 +10,7 @@ import {store} from '@/store';
 import StarRating from 'vue-star-rating';
 
 export const token = () => localStorage.getItem('auth_token');
+export const authUserData = () => JSON.parse(localStorage.getItem('auth_data') as string);
 
 export const apolloClient = new ApolloClient({
   uri: `${process.env.VUE_APP_BACKEND_URL}/graphql`,

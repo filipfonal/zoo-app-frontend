@@ -64,7 +64,7 @@ export default class Map extends Vue {
 
                 this.markers = [];
 
-                this.zoos.forEach(zoo => {
+                this.zoos.forEach((zoo) => {
                     this.markers.push({
                         id: zoo.id,
                         latlng: L.latLng(zoo.location.latitude, zoo.location.longitude),
