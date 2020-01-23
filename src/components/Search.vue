@@ -84,7 +84,7 @@ export default class Search extends Vue {
     }
 
     private getFullCityObject(cityFullName: string): City {
-        return this.cities.find(city => city.fullName === cityFullName) as City;
+        return this.cities.find((city) => city.fullName === cityFullName) as City;
     }
 
     private cityFilter(item: any, queryText: string, itemText: string): boolean {

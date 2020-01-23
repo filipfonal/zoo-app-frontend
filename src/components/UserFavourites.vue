@@ -8,7 +8,7 @@
             <div class="col-md-12">
               <div class="tab-title">Zoo:</div>
               <router-link :to="{name: 'zoo', params: {id: favourite.zooId}}" class="username">
-                <p class="review-user">{{ favourite.zooId }}</p>
+                <p class="review-user">{{ favourite.id }}</p>
               </router-link>
             </div>
           </div>

@@ -27,7 +27,7 @@
     import UserHeader from '@/components/UserHeader.vue';
     import UserReviews from '@/components/UserReviews.vue';
     import UserFavourites from '@/components/UserFavourites.vue';
-    import {GET_FRIEND_LIST} from "@/graphql/queries";
+    import {GET_FRIEND_LIST} from '@/graphql/queries';
     import { apolloClient } from '@/main';
 
     @Component({

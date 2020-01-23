@@ -51,7 +51,6 @@ export default class AuthModule extends VuexModule {
                 isLoggedIn: true,
             });
             localStorage.setItem('auth_token', response.data.issueToken);
-            store.dispatch('getAuthData');
             router.push('/');
         }, ({graphQLErrors}) => {
             this.context.dispatch('notify', {

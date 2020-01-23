@@ -21,6 +21,7 @@
     import UserHeader from '@/components/UserHeader.vue';
     import UserReviews from '@/components/UserReviews.vue';
     import UserFavourites from '@/components/UserFavourites.vue';
+    import {User as UserModel} from '@/models/User';
 
     @Component({
         components: {
@@ -30,8 +31,7 @@
         },
     })
     export default class User extends Vue {
-        [x: string]: any;
-        private user: User | null = null;
+        private user: UserModel | null = null;
         private isFriend: boolean = false;
         private favourites: object = [];
 
@@ -39,12 +39,18 @@
             return this.$store.getters.authData;
         }
 
-        public created(): void {
+        public created() {
+          this.fetchUser(this.$route.params.id);
+
+          this.$watch('$route.params.id', (id: string) => {
+            this.fetchUser(id);
+          });
+        }
+
+        public fetchUser(id: string): void {
             apolloClient.query({
                 query: GET_SINGLE_USER,
-                variables: {
-                    id: this.$route.params.id,
-                },
+                variables: { id },
             }).then((response) => {
                 this.user = response.data.user;
                 response.data.user.id === this.authData.id ? this.fetchAuthFavourites() : this.fetchFriendFavourites();

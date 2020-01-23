@@ -44,6 +44,7 @@
 <script lang='ts'>
 import Component from 'vue-class-component';
 import Vue from 'vue';
+import {store} from '@/store';
 
 @Component
 export default class Auth extends Vue {
@@ -62,6 +63,7 @@ export default class Auth extends Vue {
             email: this.email,
             password: this.password,
         }).then(() => {
+            this.$store.dispatch('getAuthData');
             this.clearData();
         });
     }
