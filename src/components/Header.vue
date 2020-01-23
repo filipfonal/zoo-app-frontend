@@ -17,15 +17,16 @@
         </v-btn>
       </template>
       <v-list>
-        <router-link v-if="authData && authData.id" :to="{name: 'user', params: {id: authData.id}}" class="username">
+        <router-link v-if="authData && authData.id" :to="{name: 'user', params: {id: authData.id}}" class="link">
           <v-list-item>
             <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
         </router-link>
-        <v-list-item @click="">
-          <v-list-item-title>Friends</v-list-item-title>
-        </v-list-item>
-
+        <router-link :to="{name: 'friend'}" class="link">
+          <v-list-item>
+            <v-list-item-title>Friends</v-list-item-title>
+          </v-list-item>
+        </router-link>
         <v-list-item @click="logout()">
           <v-list-item-title>Logout</v-list-item-title>
         </v-list-item>
@@ -60,7 +61,7 @@
     color: white;
   }
 
-  .username{
+  .link{
     text-decoration: none !important;
     color: black;
   }

@@ -9,8 +9,11 @@
         <h3 v-if="authData && user.id === authData.id">Your profile</h3>
       </div>
       <div class="user-buttons-bar" v-if="authData && user.id !== authData.id">
-        <v-btn class="mx-2" fab dark x-small color="#32bda6">
+        <v-btn class="mx-2" fab dark x-small color="#32bda6" @click="addFriend()" v-if="!isFriend">
           <v-icon dark>mdi-account-plus</v-icon>
+        </v-btn>
+        <v-btn class="mx-2" fab dark x-small color="red" @click="removeFriend()" v-else>
+          <v-icon dark>mdi-account-minus</v-icon>
         </v-btn>
       </div>
     </div>
@@ -27,6 +30,23 @@
     export default class UserHeader extends Vue {
         @Prop() public user?: User;
         @Prop() public authData?: object;
+        @Prop() public isFriend?: boolean;
+
+        private addFriend(): void {
+            if (this.user) {
+                this.$store.dispatch('addFriend', this.user.email).then(() => {
+                    this.isFriend = true;
+                });
+            }
+        }
+
+        private removeFriend(): void {
+            if (this.user) {
+                this.$store.dispatch('removeFriend', this.user.email).then(() => {
+                    this.isFriend = false;
+                });
+            }
+        }
 
     }
 </script>

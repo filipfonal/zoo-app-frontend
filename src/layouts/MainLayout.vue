@@ -21,7 +21,7 @@ import Alert from '@/components/Alert.vue';
     components: {
         Header,
         Alert,
-    }
+    },
 })
 export default class MainLayout extends Vue {
     get notification() {

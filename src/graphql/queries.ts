@@ -101,3 +101,43 @@ export const GET_SINGLE_USER = gql`
         }
     }
 `;
+
+export const GET_FRIEND_FAVOURITES = gql`
+    query friendFavourites($email: String!) {
+        friendFavourites(email: $email) {
+            id
+            user {
+                id
+                name
+                email
+            }
+            zooId
+            createdAt
+        }
+    }
+`;
+
+export const GET_OWN_FAVOURITES = gql`
+    query myFavourites {
+        myFavourites {
+            id
+            user {
+                id
+                name
+                email
+            }
+            zooId
+            createdAt
+        }
+    }
+`;
+
+export const GET_FRIEND_LIST = gql`
+    query friendList {
+        friendList {
+            id
+            name
+            email
+        }
+    }
+`;

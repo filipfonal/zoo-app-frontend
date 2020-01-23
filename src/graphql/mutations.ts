@@ -72,3 +72,40 @@ export const UPDATE_REVIEW_MUTATION = gql`
         }
     }
 `;
+
+export const ADD_FAVOURITE_MUTATION = gql`
+    mutation addFavourite($zooId: String!) {
+        addFavourite(
+            zooId: $zooId
+        ){
+            id
+            user {
+                id
+                name
+                email
+            }
+            zooId
+            createdAt
+        }
+    }
+`;
+
+export const ADD_FRIEND_MUTATION = gql`
+    mutation addFriend($email: String!) {
+        addFriend(
+            email: $email
+        ){
+            id
+            name
+            email
+        }
+    }
+`;
+
+export const REMOVE_FRIEND_MUTATION = gql`
+    mutation removeFriend($email: String!) {
+        removeFriend(
+            email: $email
+        )
+    }
+`;

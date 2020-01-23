@@ -15,7 +15,7 @@
                 :star-size="15"></star-rating>
       </div>
       <div class="zoo-buttons-bar">
-        <v-btn class="mx-2" fab dark x-small color="pink">
+        <v-btn class="mx-2" fab dark x-small color="pink" @click="addToFavourites()">
           <v-icon dark>mdi-heart</v-icon>
         </v-btn>
         <FeedbackAdder :zoo="zoo" class="feedback-button"/>
@@ -39,6 +39,11 @@
     export default class ZooHeader extends Vue {
         @Prop() public zoo?: Zoo;
 
+        private addToFavourites(): void {
+            if (this.zoo) {
+                this.$store.dispatch('addFavourite', this.zoo.id);
+            }
+        }
     }
 </script>
 

@@ -5,6 +5,7 @@ import Home from '@/views/Home.vue';
 import Auth from '@/views/Auth.vue';
 import Zoo from '@/views/Zoo.vue';
 import User from '@/views/User.vue';
+import Friend from '@/views/Friend.vue';
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,11 @@ const routes = [
         path: '/user/:id',
         name: 'user',
         component: User,
+      },
+      {
+        path: 'friend',
+        name: 'friend',
+        component: Friend,
       },
     ],
   },
